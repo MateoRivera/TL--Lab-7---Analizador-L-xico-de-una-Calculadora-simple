@@ -20,3 +20,11 @@ async def text_to_tokenize(req: Text):
 @app.post("/solverCalculator")
 async def text_to_solve(req: Text):
     return solve(req.expression)
+
+
+@app.post("/tokenizerSolverCalculator")
+async def text_to_tokenize_and_solve(req: Text):
+    return {
+        "RESULTADO": solve(req.expression),
+        "TOKENS": tokenize(req.expression)
+    }
