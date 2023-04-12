@@ -1,15 +1,22 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
-from tokenizer import tokenize
+from calculator_tokenizer import tokenize
+from calculator_parser import solve
+import json
 
 
 app = FastAPI()
 
 
 class Text(BaseModel):
-    text: str
+    expression: str
 
 
-@app.post("/tokenCalculator/")
-async def text_to_tokenize(body: Text):
-    return tokenize(body.text)
+@app.post("/tokenizerCalculator")
+async def text_to_tokenize(req: Text):
+    return tokenize(req.expression)
+
+
+@app.post("/solverCalculator")
+async def text_to_solve(req: Text):
+    return solve(req.expression)

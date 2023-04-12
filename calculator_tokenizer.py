@@ -36,4 +36,8 @@ def tokenize(data):
     lexer = lex.lex()
     lexer.input(data)
 
-    return [(tok.type, tok.value) for tok in lexer]
+    return [{"TIPO": tok.type, "TOKEN": tok.value} for tok in lexer]
+
+
+# Devuelve la instancia del lexer
+lexer = lex.lex()
