@@ -2,7 +2,6 @@ from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from calculator_tokenizer import tokenize
 from calculator_parser import solve
-import json
 
 
 app = FastAPI()

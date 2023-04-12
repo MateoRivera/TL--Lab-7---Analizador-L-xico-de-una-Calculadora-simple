@@ -9,6 +9,8 @@ precedence = (
     ('right', 'UMINUS'),
 )
 
+error = None
+
 
 def p_expression_plus(p):
     'expression : expression PLUS expression'
@@ -55,10 +57,17 @@ def p_expression_uminus(p):
 
 
 def p_error(p):
+    global error
     print("Error de sintaxis en '%s'" % p.value)
+    error = "Error de sintaxis en '%s'" % p.value
 
 
 def solve(expression):
+    global error
     parser = yacc.yacc()
     result = parser.parse(expression, lexer=lexer)
+    if error:
+        e_temp = error
+        error = None
+        return e_temp
     return result
